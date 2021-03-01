@@ -1,0 +1,15 @@
+apiVersion: v2
+publisher: Red Hat
+name: Smoke-Test-Plugin
+version: 0.0.1
+type: VS Code extension
+displayName: Smoke Test Plugin
+title: Smoke-Test-Plugin
+description: This plug-in runs tests
+icon: https://www.eclipse.org/che/images/logo-eclipseche.svg
+repository: https://github.com/svor/helloworld-test-sample.git
+category: Language
+firstPublicationDate: "2020-08-20"
+spec:
+  extensions:
+    - https://raw.githubusercontent.com/svor/helloworld-test-sample/main/helloworld-sample-0.0.1.vsix
