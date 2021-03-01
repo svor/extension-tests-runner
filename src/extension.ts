@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-const ncp = require('ncp').ncp;
 import * as glob from 'glob';
 const testReporter = require('./test-reporter');
 
