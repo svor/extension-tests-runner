@@ -7,9 +7,9 @@ displayName: Smoke Test Plugin
 title: Smoke-Test-Plugin
 description: This plug-in runs tests
 icon: https://www.eclipse.org/che/images/logo-eclipseche.svg
-repository: https://github.com/svor/helloworld-test-sample.git
-category: Language
+repository: https://github.com/svor/extension-tests-runner.git
+category: Other
 firstPublicationDate: "2020-08-20"
 spec:
   extensions:
-    - https://raw.githubusercontent.com/svor/helloworld-test-sample/main/helloworld-sample-0.0.1.vsix
+    - https://raw.githubusercontent.com/svor/extension-tests-runner/main/test-runner-0.0.1.vsix
