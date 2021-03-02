@@ -29,7 +29,6 @@ export function runTests() {
     const e = (c: any) => console.log(c);
 
     console.log('--------------------------------');
-    console.log('Extensions::: ' + JSON.stringify(vscode.extensions));
     console.log('ExtensionID::: ' + JSON.stringify(vscode.extensions.getExtension('redhat-developer.test-runner')));
     console.log('--------------------------------');
     
