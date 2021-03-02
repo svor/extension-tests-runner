@@ -29,7 +29,7 @@ export function runTests() {
     const e = (c: any) => console.log(c);
 
     console.log('--------------------------------');
-    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat-developer.test-runner');
+    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('timonwong.shellcheck');
     console.log('ExtensionID::: ' + extension.id);
     console.log('ExtensionID2::: ' + extension.isActive);
     console.log('--------------------------------');
