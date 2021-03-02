@@ -5,6 +5,16 @@ import * as glob from 'glob';
 const testReporter = require('./test-reporter');
 
 export function activate(context: vscode.ExtensionContext) {
+	const disposable = vscode.commands.registerCommand('extension.runTests', () => {
+		runTests();
+	});
+
+	runTests();
+
+	context.subscriptions.push(disposable);
+}
+
+export function runTests() {
     const mocha = new Mocha({
         ui: 'tdd',
         timeout: 60000,
@@ -12,17 +22,17 @@ export function activate(context: vscode.ExtensionContext) {
     });
     mocha.useColors(true);
 
-	const disposable = vscode.commands.registerCommand('extension.runTests', () => {
-		runTests(mocha);
-	});
+    mocha.suite.on('require', function (global, file) {
+        delete require.cache[file];
+    });
 
-	runTests(mocha);
-
-	context.subscriptions.push(disposable);
-}
-
-export function runTests(mocha: Mocha) {
     const e = (c: any) => console.log(c);
+
+    console.log('--------------------------------');
+    console.log('Extensions::: ' + JSON.stringify(vscode.extensions));
+    console.log('ExtensionID::: ' + JSON.stringify(vscode.extensions.getExtension('redhat-developer.test-runner')));
+    console.log('--------------------------------');
+    
 
     glob('*/!(node_modules)/**/*.test.js', { cwd: '/projects' }, (err, files) => {
         if (err) {
@@ -31,10 +41,6 @@ export function runTests(mocha: Mocha) {
 
         console.log("Found: ");
         console.log(files);
-
-        mocha.suite.on('require', function (global, file) {
-            delete require.cache[file];
-        });
 
         // Add files to the test suite
         files.forEach(f => mocha.addFile(path.resolve('/projects', f)));
