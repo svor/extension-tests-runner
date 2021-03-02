@@ -29,13 +29,12 @@ export function runTests() {
     const e = (c: any) => console.log(c);
 
     console.log('--------------------------------');
-    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('timonwong.shellcheck');
+    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat.vscode-xml');
     console.log('ExtensionID::: ' + extension.id);
-    console.log('ExtensionID2::: ' + extension.isActive);
+    console.log('Extension Activated::: ' + extension.isActive);
     console.log('--------------------------------');
     
     const p = path.join(__dirname, "../../");
-    console.log('Path is --- > ' + p);
     
     glob('*/!(node_modules)/**/*.test.js', { cwd: p }, (err, files) => {
         if (err) {
