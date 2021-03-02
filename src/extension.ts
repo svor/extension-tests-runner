@@ -34,6 +34,9 @@ export function runTests() {
     console.log('ExtensionID2::: ' + extension.isActive);
     console.log('--------------------------------');
     
+    const p = path.join(__dirname, "../../");
+    console.log('Path is --- > ' + p);
+    
 
     glob('*/!(node_modules)/**/*.test.js', { cwd: '/projects' }, (err, files) => {
         if (err) {

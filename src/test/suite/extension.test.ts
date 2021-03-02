@@ -8,6 +8,12 @@ import * as vscode from 'vscode';
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
 
+	console.log('--------------------------------');
+    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat-developer.test-runner');
+    console.log('ExtensionID::: ' + extension.id);
+    console.log('ExtensionID2::: ' + extension.isActive);
+    console.log('--------------------------------');
+
 	test('Sample test', () => {
 		assert.equal([1, 2, 3].indexOf(5), -1);
 		assert.equal([1, 2, 3].indexOf(0), -1);
