@@ -5,16 +5,22 @@ import * as glob from 'glob';
 const testReporter = require('./test-reporter');
 
 export function activate(context: vscode.ExtensionContext) {
-	const disposable = vscode.commands.registerCommand('extension.runTests', () => {
-		runTests();
+	const disposable1 = vscode.commands.registerCommand('extension.runTests1', () => {
+        // run tests from /projects
+		runTests('/projects');
 	});
 
-	runTests();
+    const disposable2 = vscode.commands.registerCommand('extension.runTests2', () => {
+        // run tests from /tmp/vscode-unpacked
+        runTests('/tmp/vscode-unpacked');
+	});
 
-	context.subscriptions.push(disposable);
+	runTests('/projects');
+
+	context.subscriptions.push(disposable1, disposable2);
 }
 
-export function runTests() {
+export function runTests(cwd: string) {
     const mocha = new Mocha({
         ui: 'tdd',
         timeout: 60000,
@@ -28,7 +34,7 @@ export function runTests() {
 
     const e = (c: any) => console.log(c);
     
-    glob('*/!(node_modules)/**/*.test.js', { cwd: '/projects' }, (err, files) => {
+    glob('*/!(node_modules)/**/*.test.js', { cwd: cwd }, (err, files) => {
         if (err) {
             return e(err);
         }
@@ -38,7 +44,7 @@ export function runTests() {
         
         // Add files to the test suite
         files.forEach(f => {
-            const p = path.resolve('/projects', f); 
+            const p = path.resolve(cwd, f); 
             console.log('Path is --- > ' + p);
             mocha.addFile(p)
         });

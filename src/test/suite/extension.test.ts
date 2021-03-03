@@ -8,13 +8,13 @@ import * as vscode from 'vscode';
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
 
-	console.log('--------------------------------');
-    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('timonwong.shellcheck');
-    console.log('ExtensionID::: ' + extension.id);
-    console.log('Is Extension Activated::: ' + extension.isActive);
-    console.log('--------------------------------');
-
 	test('Sample test', () => {
+		console.log('--------------------------------');
+		const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat.test-runner');
+		console.log('ExtensionID::: ' + extension.id);
+		console.log('Is Extension Activated::: ' + extension.isActive);
+		console.log('--------------------------------');
+
 		assert.equal([1, 2, 3].indexOf(5), -1);
 		assert.equal([1, 2, 3].indexOf(0), -1);
 		assert.notEqual('a', 'a');

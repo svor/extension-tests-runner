@@ -4,7 +4,7 @@
 	"description": "VS Code Extension's tests runner",
 	"version": "0.0.1",
 	"repository": {},
-	"publisher": "redhat-developer",
+	"publisher": "redhat",
 	"engines": {
 		"vscode": "^1.32.0"
 	},
@@ -18,8 +18,12 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.runTests",
-				"title": "Run VSCode Extension's Tests"
+				"command": "extension.runTests1",
+				"title": "Run VSCode Extension's Tests From /projects"
+			},
+			{
+				"command": "extension.runTests2",
+				"title": "Run VSCode Extension's Tests from extension"
 			}
 		]
 	},
