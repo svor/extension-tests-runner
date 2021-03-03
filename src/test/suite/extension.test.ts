@@ -17,6 +17,6 @@ suite('Extension Test Suite', () => {
 
 		assert.equal([1, 2, 3].indexOf(5), -1);
 		assert.equal([1, 2, 3].indexOf(0), -1);
-		assert.notEqual('a', 'a');
+		assert.equal('a', 'a');
 	});
 });
