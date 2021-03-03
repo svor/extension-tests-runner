@@ -28,9 +28,7 @@ export function runTests() {
 
     const e = (c: any) => console.log(c);
     
-    const p = path.join(__dirname, "../../");
-    
-    glob('*/!(node_modules)/**/*.test.js', { cwd: '/tmp/vscode-unpacked' }, (err, files) => {
+    glob('*/!(node_modules)/**/*.test.js', { cwd: '/projects' }, (err, files) => {
         if (err) {
             return e(err);
         }
@@ -40,9 +38,9 @@ export function runTests() {
         
         // Add files to the test suite
         files.forEach(f => {
-            const pp = path.resolve('/tmp/vscode-unpacked', f); 
-            console.log('Path is --- > ' + pp);
-            mocha.addFile(pp)
+            const p = path.resolve('/projects', f); 
+            console.log('Path is --- > ' + p);
+            mocha.addFile(p)
         });
 
         try {

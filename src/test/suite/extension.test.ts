@@ -9,9 +9,9 @@ suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
 
 	console.log('--------------------------------');
-    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat.vscode-xml');
+    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('timonwong.shellcheck');
     console.log('ExtensionID::: ' + extension.id);
-    console.log('Extension Activated::: ' + extension.isActive);
+    console.log('Is Extension Activated::: ' + extension.isActive);
     console.log('--------------------------------');
 
 	test('Sample test', () => {
