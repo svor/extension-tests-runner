@@ -9,9 +9,9 @@ suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
 
 	console.log('--------------------------------');
-    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat-developer.test-runner');
+    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat.vscode-xml');
     console.log('ExtensionID::: ' + extension.id);
-    console.log('ExtensionID2::: ' + extension.isActive);
+    console.log('Extension Activated::: ' + extension.isActive);
     console.log('--------------------------------');
 
 	test('Sample test', () => {

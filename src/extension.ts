@@ -27,12 +27,6 @@ export function runTests() {
     });
 
     const e = (c: any) => console.log(c);
-
-    console.log('--------------------------------');
-    const extension = <vscode.Extension<any>>vscode.extensions.getExtension('redhat.vscode-xml');
-    console.log('ExtensionID::: ' + extension.id);
-    console.log('Extension Activated::: ' + extension.isActive);
-    console.log('--------------------------------');
     
     const p = path.join(__dirname, "../../");
     
