@@ -9,38 +9,42 @@
  **********************************************************************/
 
 import * as mocha from 'mocha';
-module.exports = StreamLogReporter;
+import * as fs from 'fs';
 
-var fs = require('fs');
-var writeStream = fs.createWriteStream('/projects/test.log', {
-    encoding: 'utf8',
-    flags: 'w'
-});
+export class StreamLogReporter extends mocha.reporters.Base {
+    private passes = 0;
+    private writeStream?: fs.WriteStream;
 
-function StreamLogReporter(this: any, runner: any) {
-    mocha.reporters.Base.call(this, runner);
-    var passes = 0;
-    var failures = 0;
+    constructor(runner: mocha.Runner, options: mocha.MochaOptions) {
+        super(runner);
 
-    runner.on('pass', function(test: any) {
-        passes++;
-        console.log('SUCCESS: %s', test.fullTitle());
-        writeStream.write('SUCCESS: ' + test.fullTitle() + '\n');
-    });
+        runner.on('start', () => {
+            this.writeStream = fs.createWriteStream(options.reporterOptions.outFile, {
+                encoding: 'utf8',
+                flags: 'w'
+            });
+        });
 
-    runner.on('fail', function(test: any, err: any) {
-        failures++;
-        console.log('FAILURE: %s -- error: %s', test.fullTitle(), err.message);
-        writeStream.write('FAILURE: ' + test.fullTitle() + ' -- error: ' + err.message + '\n');
-    });
+        runner.on('pass', (test: any) => {
+            this.passes++;
+            console.log('SUCCESS: %s', test.fullTitle());
+            this.writeStream!.write('SUCCESS: ' + test.fullTitle() + '\n');
+        });
 
-    runner.on('end', function() {
-        if (failures > 0) {
-            console.log('FINISH: %d/%d', passes, passes + failures);
-            writeStream.write(`TESTS FAILED: ${passes}/${passes + failures}\n`);
-        } else {
-            console.log('FINISH: %d/%d', passes, passes + failures);
-            writeStream.write(`TESTS PASSED: ${passes}/${passes + failures}\n`);
-        }
-    });
+        runner.on('fail', (test: any, err: any) => {
+            console.log('FAILURE: %s -- error: %s', test.fullTitle(), err.message);
+            this.writeStream!.write('FAILURE: ' + test.fullTitle() + ' -- error: ' + err.message + '\n');
+        });
+
+        runner.on('end', () => {
+            if (this.failures.length > 0) {
+                console.log('FINISH: %d/%d', this.passes, this.passes + this.failures.length);
+                this.writeStream!.write(`TESTS FAILED: ${this.passes}/${this.passes + this.failures.length}\n`);
+            } else {
+                console.log('FINISH: %d/%d', this.passes, this.passes + this.failures.length);
+                this.writeStream!.write(`TESTS PASSED: ${this.passes}/${this.passes + this.failures.length}\n`);
+            }
+            this.writeStream!.close();
+        });
+    }
 }
