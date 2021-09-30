@@ -19,7 +19,7 @@
 		"commands": [
 			{
 				"command": "extension.runTests1",
-				"title": "Run VSCode Extension's Tests From /projects"
+				"title": "Run VSCode Extension's Tests from folder"
 			},
 			{
 				"command": "extension.runTests2",
